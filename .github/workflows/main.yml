@@ -7,11 +7,25 @@ on:
 jobs:
   python-setup:
     runs-on: ubuntu-latest
+    
     steps:
+    - uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          
     - uses: actions/checkout@v3
+    
     - uses: actions/setup-python@v4
       with:
         python-version: '3.9.12' 
+
+    - run: pip install -r requirements.txt
+    
     - uses: jpetrucciani/black-check@22.10.0
       with:
         path: ./
+    
+    - run: pip list
