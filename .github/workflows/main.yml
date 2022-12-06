@@ -25,3 +25,5 @@ jobs:
     - uses: jpetrucciani/black-check@22.10.0
       with:
         path: ./
+    
+    - run: pip list
