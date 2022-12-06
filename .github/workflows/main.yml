@@ -5,9 +5,14 @@ on:
     branches: [main]
 
 jobs:
-  my_job:
-    name: python-setting
+  python-setup:
     runs-on: ubuntu-latest
-    
     steps:
-    - run: ls
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.9.12' 
+    - uses: jpetrucciani/black-check@22.10.0
+      with:
+        path: ./
+    - run: black
